@@ -38,30 +38,30 @@ const destroy = (req, res) => {
 
 const store = (req, res) => {
     const {users_id, name, price, stock, status} = req.body;
-    const image = req.file;
+    // const image = req.file;
     if(image) {
-        const target = path.join(__dirname, '../../uploads', image.originalname);
+        // const target = path.join(__dirname, '../../uploads', image.originalname);
       
-        fs.renameSync(image.path, target);
+        // fs.renameSync(image.path, target);
         
         connection.query({
             sql: 'INSERT INTO products (users_id, name, price, stock, status, image_url) VALUES (?, ?, ?, ?, ?, ?)',
-            values: [parseInt(users_id), name, price, stock, status, `http://localhost:3000/public/${image.originalname}`]
+            values: [parseInt(users_id), name, price, stock, status]
         }, _response(res));
     }
 }
 
 const update = (req, res) => {
     const {users_id, name, price, stock, status} = req.body;
-    const image = req.file;
+    // const image = req.file;
     let sql = '';
     let values = [];
     if(image) {
-        const target = path.join(__dirname, '../../uploads', image.originalname);
+        // const target = path.join(__dirname, '../../uploads', image.originalname);
       
         fs.renameSync(image.path, target);
          sql = 'UPDATE products SET users_id = ?, name = ?, price = ?, stock = ?, status = ?, image_url = ? WHERE id = ?';
-         values = [parseInt(users_id), name, price, stock, status, `http://localhost:3000/public/${image.originalname}`, req.params.id];
+         values = [parseInt(users_id), name, price, stock, status,  req.params.id];
     } else {
         sql = 'UPDATE products SET users_id = ?, name = ?, price = ?, stock = ?, status = ?, WHERE id = ?';
         values = [parseInt(users_id), name, price, stock, status, req.params.id];
