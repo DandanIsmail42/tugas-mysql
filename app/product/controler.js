@@ -1,6 +1,5 @@
 const connection = require('../../config/mysql');
-const fs = require('fs');
-const path = require('path');
+
 
 
 
