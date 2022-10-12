@@ -1,21 +1,19 @@
-
-const DaftarMahasiswa = require('./model');
-
+const DaftarMhs = require('./model');
 
 
 
 const index = async (req, res) => {
     try{
-        await DaftarMahasiswa.findAll()
+        await DaftarMhs.findAll()
         .then ((result) => {
             if(result.length > 0 ) {
                 res.status(200).json({
-                    message: ' Get Method DaftarMahasiswa',
+                    message: ' Semua daftar DaftarMhs',
                     data: result
                 })
             } else {
                 res.status(200).json({
-                    message: ' Get Method DaftarMahasiswa',
+                    message: ' Get Method DaftarMhs',
                     data: []
             })
         }
@@ -29,8 +27,8 @@ const index = async (req, res) => {
 
 const view = async (req, res) => {
     let id = req.params.id;
-    let products = await Product.findOne({where: {id: id}})
-    res.status(200).send(products)
+    let daftarmhs = await DaftarMhs.findOne({where: {id: id}})
+    res.status(200).send(daftarmhs)
 }
 
 const store = async (req, res) => {
@@ -38,8 +36,8 @@ const store = async (req, res) => {
   
     
     try{
-        await DaftarMahasiswa.sync();
-        const result = await DaftarMahasiswa.create({name, nim, alamat});
+        await DaftarMhs.sync();
+        const result = await DaftarMhs.create({name, nim, alamat});
         res.send(result);
     }catch(e) {
         res.send(e);
@@ -47,13 +45,13 @@ const store = async (req, res) => {
 };
 
 const update = async (req, res) => {
-    const {users_id, name, price, stock, status} = req.body;
+    const {name, nim, alamat} = req.body;
    
     let id = req.params.id;
    
     try{
-        await Product.sync();
-        const result = await Product.update({users_id, name, price, stock, status}, 
+        await DaftarMhs.sync();
+        const result = await DaftarMhs.update({name, nim, alamat}, 
         {
             where: {
                 id: id
@@ -61,7 +59,7 @@ const update = async (req, res) => {
         }
         );
         res.status(200).json({
-            message: ' Put Method Product',
+            message: ' Update Successfully',
             data: result
         })
     }catch(e) {
@@ -69,12 +67,12 @@ const update = async (req, res) => {
     }
 }
 
-const deleteProduct = async (req, res) => {
+const deleteMhs = async (req, res) => {
     let id = req.params.id;
-    await Product.destroy({where: {id: id}})
-    res.status(200).send('Product is deleted')
+    await DaftarMhs.destroy({where: {id: id}})
+    res.status(200).send('Daelete Successfully')
 }
 
 module.exports = {
-    index, view, store, update, deleteProduct
+    index, view, store, update, deleteMhs
 }

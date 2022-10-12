@@ -5,7 +5,7 @@ router.get('/daftarmahasiswa', controlerV2.index);
 router.get('/daftarmahasiswa/:id', controlerV2.view);
 router.post('/daftarmahasiswa', controlerV2.store);
 router.put('/daftarmahasiswa/:id', controlerV2.update);
-router.delete('/daftarmahasiswa/:id', controlerV2.deleteProduct);
+router.delete('/daftarmahasiswa/:id', controlerV2.deleteMhs);
 
 
 
