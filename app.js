@@ -9,6 +9,7 @@ const logger = require('morgan');
 app.use(logger('dev'));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+app.use(cors());
 
 app.use('/api/v1', productRouter);
 app.use('/api/v2', productRouterV2);
